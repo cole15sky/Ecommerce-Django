@@ -16,6 +16,12 @@ def home(request):
 def about(request):
     return render(request, 'about.html', {})
 
+def product(request,pk):
+    product = Product.objects.get(id=pk)
+    return render(request, 'product.html', {'product': product})
+
+
+
 
 def login_user(request):
     if request.method == "POST":
@@ -62,3 +68,8 @@ def register_user(request):
             messages.error(request, "Oops, there was a problem. Try again.")
             return redirect('register')
     return render(request, 'register.html', {'form': form})
+
+
+
+
+    
