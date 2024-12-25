@@ -72,4 +72,17 @@ def register_user(request):
 
 
 
+def category(request,foo):
+    foo = foo.replace('-','')
+    try:
+        category = Category.objects.get(name=foo)
+        products = Product.objects.filter(category=category)
+        return render (request,'category.html',{'products':products,'category':category})
+    except:
+        messages.success(request, "Oops, Category doesnot exists!")
+        return redirect('home')
+
+
+
+
     
