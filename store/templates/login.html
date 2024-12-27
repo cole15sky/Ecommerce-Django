@@ -1,41 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
+<!-- Header -->
+<header class="bg-gray-900 py-12">
+    <div class="container mx-auto px-4 lg:px-8">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Login</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Login to your Account.</p>
+            <h1 class="text-4xl font-extrabold">Login</h1>
+            <p class="mt-2 text-lg text-gray-400">Login to your Account.</p>
         </div>
     </div>
 </header>
-<br>
 
-<div class="container">
-    <div class="row">
-        <center>
-            <div class="col-md offset-md-3">
-                <form method="POST" action="{% url 'login' %}">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-secondary">Login</button>
-                </form>                
-            </div>
-        </center>
+<div class="container mx-auto px-4 lg:px-8 py-12">
+    <div class="flex justify-center">
+        <div class="w-full max-w-md">
+            <form method="POST" action="{% url 'login' %}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Login
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<br><br><br>
-<br><br><br>
-<br><br><br>
 
 {% endblock %}

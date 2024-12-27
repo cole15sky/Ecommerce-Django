@@ -1,79 +1,51 @@
-
 {% extends 'base.html' %}
 {% block content %}
 
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
+        <!-- Header -->
+        <header class="bg-gray-900 py-12">
+            <div class="container mx-auto px-4 lg:px-8">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Shop in style</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+                    <h1 class="text-4xl font-extrabold">Shop in style</h1>
+                    <p class="mt-2 text-lg text-gray-400">With this shop homepage template</p>
                 </div>
             </div>
         </header>
-        <!-- Section-->
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                 {% for product in products %}
-                 {% if product.is_sale %}
-                 <div class="col mb-5">
-                    <div class="card h-100">
-                        <div class="badge bg-light text-black position-absolute" style="top:0.5 rem; right:0.5rem"> Sale  </div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="{{ product.image.url  }}" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">{{product.name}}</h5>
-                                <!-- sale -->
-                                <!-- Product price-->
-                                <strike> ${{product.price}}  </strike> 
-                                &nbsp;
-                                ${{product.sale_price}}
-                                <br/>
-                                {{product.description}}
-                                <br/>
-            
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View Product</a></div>
-                        </div>
-                    </div>
-                </div>
-                 {% else %}
 
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{{ product.image.url  }}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">{{product.name}}</h5>
-                                    <!-- Product price-->
-                                    ${{product.price}}
-                                    <br/>
-                                    {{product.description}}
-                                    <br/>
-                
+        <!-- Section -->
+        <section class="py-12">
+            <div class="container mx-auto px-4 lg:px-8">
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {% for product in products %}
+                        <div class="col relative">
+                            <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col h-[90vh] max-h-[400px]">
+                                {% if product.is_sale %}
+                                    <!-- Sale Badge -->
+                                    <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Sale</div>
+                                {% endif %}
+                                <!-- Product image -->
+                                <img class="w-full h-40 object-cover" src="{{ product.image.url }}" alt="Product Image">
+                                <!-- Product details -->
+                                <div class="p-4 text-center flex-grow">
+                                    <h5 class="font-semibold text-lg text-gray-800">{{ product.name }}</h5>
+                                    <div class="mt-2">
+                                        {% if product.is_sale %}
+                                            <span class="line-through text-gray-500">${{ product.price }}</span>
+                                            <span class="ml-2 text-red-600 font-bold">${{ product.sale_price }}</span>
+                                        {% else %}
+                                            <span class="text-gray-800 font-bold">${{ product.price }}</span>
+                                        {% endif %}
+                                    </div>
+                                    <p class="mt-2 text-sm text-gray-600 truncate">{{ product.description }}</p>
+                                </div>
+                                <!-- Product actions -->
+                                <div class="p-4 bg-gray-50">
+                                    <a class="block text-center bg-blue-600 text-white py-2 rounded hover:bg-blue-500 transition" href="{% url 'product' product.id %}">View Product</a>
                                 </div>
                             </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View Product</a></div>
-                            </div>
                         </div>
-                    </div>
-                    {% endif %}
-                {% endfor %}
-
-
+                    {% endfor %}
+                </div>
             </div>
         </section>
-        {% endblock %}
- 
+
+{% endblock %}

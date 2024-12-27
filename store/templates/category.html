@@ -1,79 +1,53 @@
-
 {% extends 'base.html' %}
 {% block content %}
 
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder"> {{category}} </h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Category page.</p>
-                </div>
-            </div>
-        </header>
-        <!-- Section-->
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                 {% for product in products %}
-                 {% if product.is_sale %}
-                 <div class="col mb-5">
-                    <div class="card h-100">
-                        <div class="badge bg-light text-black position-absolute" style="top:0.5 rem; right:0.5rem"> Sale  </div>
-                        <!-- Product image-->
-                        <img class="card-img-top" src="{{ product.image.url  }}" alt="..." />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">{{product.name}}</h5>
-                                <!-- sale -->
-                                <!-- Product price-->
-                                <strike> ${{product.price}}  </strike> 
-                                &nbsp;
-                                ${{product.sale_price}}
-                                <br/>
-                                {{product.description}}
-                                <br/>
-            
-                            </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View Product</a></div>
-                        </div>
-                    </div>
-                </div>
-                 {% else %}
+<!-- Header-->
+<header class="bg-dark py-12">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 font-bold text-4xl md:text-5xl">{{ category }}</h1>
+            <p class="lead font-normal text-white-50 mb-0 text-xl">Category page with amazing deals!</p>
+        </div>
+    </div>
+</header>
 
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{{ product.image.url  }}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">{{product.name}}</h5>
-                                    <!-- Product price-->
-                                    ${{product.price}}
-                                    <br/>
-                                    {{product.description}}
-                                    <br/>
-                
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View Product</a></div>
-                            </div>
-                        </div>
-                    </div>
+<!-- Section-->
+<section class="py-12 bg-gray-50">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+            {% for product in products %}
+                <div class="w-full max-w-sm bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 relative">
+                    {% if product.is_sale %}
+                        <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold py-1 px-2 rounded-full">Sale</div>
                     {% endif %}
-                {% endfor %}
+                    <!-- Product image-->
+                    <img class="w-full h-56 object-cover rounded-t-lg" src="{{ product.image.url }}" alt="{{ product.name }}">
+                    <!-- Product details-->
+                    <div class="p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="font-semibold text-xl text-gray-800">{{ product.name }}</h5>
+                            <div class="mt-2 flex justify-center space-x-2">
+                                {% if product.is_sale %}
+                                    <span class="text-gray-500 line-through">${{ product.price }}</span>
+                                    <span class="text-red-500 font-bold">${{ product.sale_price }}</span>
+                                {% else %}
+                                    <span class="text-gray-800 font-bold">${{ product.price }}</span>
+                                {% endif %}
+                            </div>
+                            <p class="text-sm text-gray-500 mt-2">{{ product.description }}</p>
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="p-4 bg-transparent border-t border-gray-200">
+                        <div class="text-center">
+                            <a href="{% url 'product' product.id %}" class="btn btn-outline-dark mt-auto bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-all">View Product</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
-
-            </div>
-        </section>
-        {% endblock %}
- 
+{% endblock %}

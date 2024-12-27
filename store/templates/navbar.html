@@ -1,43 +1,51 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="{% url 'home'%}">SkyMall</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home'%}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'about'%}">About</a></li>
+<nav class="bg-gray-100 border-b">
+    <div class="container mx-auto px-4 lg:px-8 flex items-center justify-between py-4 relative">
+        <a href="{% url 'home' %}" class="text-xl font-bold text-gray-800">SkyMall</a>
+        <button class="lg:hidden text-gray-800 focus:outline-none" aria-label="Toggle navigation" @click="open = !open">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+        <div class="hidden lg:flex items-center space-x-6 justify-center w-full">
+            <ul class="flex items-center space-x-6">
+                <li><a href="{% url 'home' %}" class="text-gray-800 hover:text-blue-600">Home</a></li>
+                <li><a href="{% url 'about' %}" class="text-gray-800 hover:text-blue-600">About</a></li>
 
-
-
-
-                {% if user.is_authenticated%}
-                <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}">Logout</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}" class="text-gray-800 hover:text-blue-600">Logout</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'login'%}">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'register'%}">Register</a></li>
-
+                <li><a href="{% url 'login' %}" class="text-gray-800 hover:text-blue-600">Login</a></li>
+                <li><a href="{% url 'register' %}" class="text-gray-800 hover:text-blue-600">Register</a></li>
                 {% endif %}
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'home' %}">All Products</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="{% url 'category' 'Monitors' %}">Monitors</a></li>
-                        <li><a class="dropdown-item" href="{% url 'category' 'Keyboard' %}">Keyboard</a></li>
-                        <li><a class="dropdown-item" href="{% url 'category' 'Laptop'%}">Laptops</a></li>
-                        <li><a class="dropdown-item" href="{% url 'category' 'Mouse'%}">Mouse</a></li>
-                        <li><a class="dropdown-item" href="{% url 'category' 'Other'%}">Other</a></li>
+                <li class="relative group">
+                    <a href="#" class="flex items-center text-gray-800 hover:text-blue-600">Categories
+                        <svg class="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </a>
+                    <ul class="absolute hidden group-hover:block bg-white shadow-md mt-2 rounded-md py-2 z-10 w-48">
+                        <li><a href="{% url 'home' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">All Products</a></li>
+                        <li><hr class="border-gray-200"></li>
+                        <li><a href="{% url 'category' 'Monitors' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Monitors</a></li>
+                        <li><a href="{% url 'category' 'Keyboards' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Keyboard</a></li>
+                        <li><a href="{% url 'category' 'Laptop' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Laptops</a></li>
+                        <li><a href="{% url 'category' 'Mouses' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Mouse</a></li>
+                        <li><a href="{% url 'category' 'Other' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Other</a></li>
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex">
-                <button class="btn btn-outline-dark" type="submit">
-                    <i class="bi-cart-fill me-1"></i>
-                    <a href="{% url 'cart_summary'%}"> Cart</a>
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                </button>
-            </form>
         </div>
+        <!-- Cart Icon (positioned top-right) -->
+        <form class="relative  top-0 right-0 mt-4 mr-4">
+            <a href="{% url 'cart_summary' %}" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
+                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h18l-2 13H5L3 3z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 19a2 2 0 11-4 0" />
+                </svg>
+                <span>Cart</span>
+                <span class="bg-gray-800 text-white text-xs font-semibold rounded-full px-2 py-1">0</span>
+            </a>
+        </form>
     </div>
 </nav>

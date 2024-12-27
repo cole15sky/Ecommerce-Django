@@ -1,35 +1,85 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Register</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Register to your Account.</p>
-        </div>
+<!-- Header -->
+<header class="bg-gray-800 py-8">
+    <div class="container mx-auto px-4 text-center text-white">
+        <h1 class="text-4xl font-bold">Register</h1>
+        <p class="text-lg mt-2 text-gray-300">Create your account to get started</p>
     </div>
 </header>
-<br>
 
-<div class="container">
-    <div class="row">
-        <center>
-            <div class="col-md offset-md-3">
-                <form method="POST" action="{% url 'register' %}">
-                    {% csrf_token %}
-                   {{form.as_p}}
+<!-- Registration Form -->
+<div class="container mx-auto px-4 py-12">
+    <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-8">
+        <form method="POST" action="{% url 'register' %}" class="space-y-6">
+            {% csrf_token %}
 
-                   <br/>   <br/>
-                   <button type="submit" class="btn ntn-secondary"> Register</button>
-
+            <!-- Username -->
+            <div>
+                <label for="id_username" class="block text-lg font-medium text-gray-700">Username</label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                <p class="text-sm text-red-500 mt-1">{{ form.username.errors.0 }}</p>
+                {% endif %}
+                {{ form.username.help_text|safe }}
             </div>
-        </center>
+
+            <!-- First Name -->
+            <div>
+                <label for="id_first_name" class="block text-lg font-medium text-gray-700">First Name</label>
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                <p class="text-sm text-red-500 mt-1">{{ form.first_name.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Last Name -->
+            <div>
+                <label for="id_last_name" class="block text-lg font-medium text-gray-700">Last Name</label>
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                <p class="text-sm text-red-500 mt-1">{{ form.last_name.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label for="id_email" class="block text-lg font-medium text-gray-700">Email</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                <p class="text-sm text-red-500 mt-1">{{ form.email.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Password -->
+            <div>
+                <label for="id_password1" class="block text-lg font-medium text-gray-700">Password</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                <p class="text-sm text-red-500 mt-1">{{ form.password1.errors.0 }}</p>
+                {% endif %}
+                {{ form.password1.help_text|safe }}
+            </div>
+
+            <!-- Confirm Password -->
+            <div>
+                <label for="id_password2" class="block text-lg font-medium text-gray-700">Confirm Password</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                <p class="text-sm text-red-500 mt-1">{{ form.password2.errors.0 }}</p>
+                {% endif %}
+                {{ form.password2.help_text|safe }}
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-md font-semibold transition duration-300">
+                    Register
+                </button>
+            </div>
+        </form>
     </div>
 </div>
-
-<br><br><br>
-<br><br><br>
-<br><br><br>
 
 {% endblock %}
