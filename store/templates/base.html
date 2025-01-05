@@ -1,14 +1,15 @@
 {% load static tailwind_tags %}
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Django Ecommerce</title>
           {% tailwind_css %}
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     </head>
     <body>
@@ -33,5 +34,6 @@
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy;  SkyMall</p></div>
         </footer>
-    </body>
+      
+          </body>
 </html>

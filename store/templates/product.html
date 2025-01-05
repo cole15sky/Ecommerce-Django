@@ -1,40 +1,77 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <!-- Product Detail Section -->
-    <br> <br>
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Product Image -->
-                <div class="flex justify-center items-center">
-                    <img class="w-full max-w-md h-auto rounded-lg shadow-lg" src="{{ product.image.url }}" alt="{{ product.name }}">
-                </div>
-                <!-- Product Details -->
-                <div>
-                    <!-- Product Name -->
-                    <h1 class="text-3xl font-extrabold text-gray-800">{{ product.name }}</h1>
+<!-- Product Detail Section -->
+<br> <br>
+<section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Product Image -->
+            <div class="flex justify-center items-center">
+                <img class="w-full max-w-md h-auto rounded-lg shadow-lg" src="{{ product.image.url }}"
+                    alt="{{ product.name }}">
+            </div>
+            <!-- Product Details -->
+            <div>
+                <!-- Product Name -->
+                <h1 class="text-3xl font-extrabold text-gray-800">{{ product.name }}</h1>
 
-                    <!-- Product Description -->
-                    <p class="mt-4 text-gray-600 text-lg">{{ product.description }}</p>
-                    
-                    <!-- Product Price -->
-                    <div class="mt-6">
-                        {% if product.is_sale %}
-                            <!-- Show original price with line-through if the product is on sale -->
-                            <span class="text-gray-500 text-xl line-through">${{ product.price }}</span>
-                            <span class="ml-3 text-red-600 text-2xl font-bold">${{ product.sale_price }}</span>
-                        {% else %}
-                            <!-- Show regular price if the product is not on sale -->
-                            <span class="text-gray-800 text-2xl font-bold">${{ product.price }}</span>
-                        {% endif %}
-                    </div>
-                    
+                <!-- Product Description -->
+                <p class="mt-4 text-gray-600 text-lg">{{ product.description }}</p>
+
+                <!-- Product Price -->
+                <div class="mt-6">
+                    {% if product.is_sale %}
+                    <!-- Show original price with line-through if the product is on sale -->
+                    <span class="text-gray-500 text-xl line-through">${{ product.price }}</span>
+                    <span class="ml-3 text-red-600 text-2xl font-bold">${{ product.sale_price }}</span>
+                    {% else %}
+                    <!-- Show regular price if the product is not on sale -->
+                    <span class="text-gray-800 text-2xl font-bold">${{ product.price }}</span>
+                    {% endif %}
                 </div>
+                <button type="button" value="{{ product.id }}" id="add-cart"
+                class="bg-blue-500 text-black py-2 rounded hover:bg-blue-800 transition">
+            Add to Cart
+        </button>
+        
+        
+           
+
+
+
             </div>
         </div>
-    </section>
-    <br> <br> <br>
-    <br> <br> <br>
+    </div>
+</section>
+<br> <br> <br>
+<br> <br> <br>
+
+
+<script>
+    // Listen for the button click
+    $(document).on('click', '#add-cart', function (e) {
+        e.preventDefault();
+        
+        // Use `this` to retrieve the clicked button's value
+        const productId = $(this).val();  
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart_add" %}', // Corrected URL
+            data: {
+                product_id: productId,
+                csrfmiddlewaretoken: '{{ csrf_token }}', // Pass CSRF token
+                action: 'post'
+            },
+            success: function (json) {
+                console.log("Success:", json);
+            },
+            error: function (xhr, errmsg, err) {
+                console.error("Error:", errmsg);
+            }
+        });
+    });
+</script>
 
 {% endblock %}
