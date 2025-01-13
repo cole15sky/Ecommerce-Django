@@ -4,7 +4,9 @@ from .cart import Cart
 from store.models import Product
 
 def cart_summary(request):
-    return render(request, 'cart/cart_summary.html', {})
+    cart = Cart(request)
+    cart_products = cart.get_prdt
+    return render(request, 'cart/cart_summary.html', {"cart_products":cart_products})
 
 def cart_add(request):
     cart = Cart(request)
