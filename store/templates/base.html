@@ -9,94 +9,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %} SkyMall {% endblock %}</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
-<body class="background flex flex-col min-h-screen"> 
-  <main class="font-sans bg-red-400 flex-grow"> 
+<body class="min-h-screen flex flex-col">
+  <main class="font-sans">
 
-<nav class="bg-gray-100 shadow-md">
-  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-
-    <div class="text-xl font-bold mt-5">
-      <a href="{% url 'home' %}" class="text-xl font-bold text-gray-800">SkyMall</a>
-  </div>
-
-
-  <div class="flex justify-end">
-    <a href="{% url 'cart_summary' %}" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
-        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h18l-2 13H5L3 3z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M16 19a2 2 0 11-4 0" />
-        </svg>
-        <span>Cart</span>
-        <span class="bg-gray-800 text-white text-xs font-semibold rounded-full px-2 py-1" id="cart_quantity">{{ cart|length}}</span>
-    </a>
-  </div>
-  </div>
-
-
-
-  <!-- Hamburger Menu (Mobile) -->
-  <button id="menu-toggle" class="text-black lg:hidden mr-4 mt-5 focus:outline-none">
-      <i class="fa-solid fa-bars fa-xl"></i>
-  </button>
-
-                  <!-- Desktop Navigation Links -->
-           <ul id="menu" class=" lg:flex  space-x-6 items-center justify-center flex-grow font-serif font-semibold text-md">
-                    <li><a href="{% url 'home' %}" class="text-black hover:text-blue-600">Home</a></li>
-              <li><a href="{% url 'about' %}" class="text-gray-800 hover:text-blue-600">About</a></li>
-
-              {% if user.is_authenticated %}
-              <li><a href="{% url 'logout' %}" class="text-gray-800 hover:text-blue-600">Logout</a></li>
-              <li><a href="" class="text-gray-800 hover:text-blue-600">Dashboard</a></li>
-              {% else %}
-              <li><a href="{% url 'login' %}" class="text-gray-800 hover:text-blue-600">Login</a></li>
-              <li><a href="{% url 'register' %}" class="text-gray-800 hover:text-blue-600">Register</a></li>
-              {% endif %}
-
-              <li class="relative group">
-                  <a href="#" class="flex items-center text-gray-800 hover:text-blue-600">Categories
-                      <svg class="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                      </svg>
-                  </a>
-                  <ul class="absolute hidden group-hover:block bg-white shadow-md mt-2 rounded-md py-2 z-10 w-48">
-                      <li><a href="{% url 'home' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">All Products</a></li>
-                      <li><hr class="border-gray-200"></li>
-                      <li><a href="{% url 'category' 'Monitors' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Monitors</a></li>
-                      <li><a href="{% url 'category' 'Keyboards' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Keyboard</a></li>
-                      <li><a href="{% url 'category' 'Laptop' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Laptops</a></li>
-                      <li><a href="{% url 'category' 'Mouses' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Mouse</a></li>
-                      <li><a href="{% url 'category' 'Other' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Other</a></li>
-                  </ul>
-              </li>
-          </ul>
-
-
-
-      </div>
-      <!-- Cart Icon (positioned top-right) -->
+    <!-- Navbar -->
+    <nav class="bg-gray-100 shadow-md">
+      <div class="container mx-auto px-4 py-8 flex items-center justify-between">
+        <!-- Logo -->
+        <div class="text-xl font-bold">
+          <a href="{% url 'home' %}" class="text-gray-800">SkyMall</a>
+        </div>
     
-  </div>
-</nav>
-
-      <!-- Mobile Dropdown Menu -->
-      <div id="mobile-menu" class="hidden fixed inset-0 bg-gray-800 text-white shadow-md md:hidden z-50">
-        <ul class="flex flex-col space-y-4 py-4 px-6 h-full items-center justify-center">
-          <li><a href="{% url 'home' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Home</a></li>
-          <li><a href="{% url 'about' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">About</a></li>
-
+        <div class="hidden lg:flex flex-grow items-center justify-center space-x-6">
+          <a href="{% url 'home' %}" class="text-black hover:text-blue-600">Home</a>
+          <a href="{% url 'about' %}" class="text-gray-800 hover:text-blue-600">About</a>
+          
           {% if user.is_authenticated %}
-          <li><a href="{% url 'logout' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Logout</a></li>
-          <li><a href="" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Dashboard</a></li>
-          {% else %}
-          <li><a href="{% url 'login' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Login</a></li>
-          <li><a href="{% url 'register' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Register</a></li>
-          {% endif %}
-          <li class="relative group">
-            <a href="#" class="flex items-center text-white hover:text-blue-600">Categories
+          <a href="{% url 'logout' %}" class="text-gray-800 hover:text-blue-600">Logout</a>
+          <a href="#" class="text-gray-800 hover:text-blue-600">Dashboard</a>
+          <div class="relative group">
+            <a href="#" class="flex items-center text-gray-800 hover:text-blue-600">Categories
                 <svg class="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
@@ -110,42 +45,94 @@
                 <li><a href="{% url 'category' 'Mouses' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Mouse</a></li>
                 <li><a href="{% url 'category' 'Other' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Other</a></li>
             </ul>
-        </li>
+        </div>
+
+          {% else %}
+          <a href="{% url 'login' %}" class="text-gray-800 hover:text-blue-600">Login</a>
+          <a href="{% url 'register' %}" class="text-gray-800 hover:text-blue-600">Register</a>
+          {% endif %}
+          
+        </div>
+    
+        <!-- Cart Icon on the Right -->
+        <div class="hidden lg:flex items-center">
+          <a href="{% url 'cart_summary' %}" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600">
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h18l-2 13H5L3 3z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 19a2 2 0 11-4 0" />
+            </svg>
+            <span>Cart</span>
+            <span class="bg-gray-800 text-white text-xs font-semibold rounded-full px-2 py-1" id="cart_quantity">{{ cart|length }}</span>
+          </a>
+        </div>
+    
+        <!-- Hamburger Menu for Mobile -->
+        <button id="menu-toggle" class="lg:hidden text-black focus:outline-none">
+          <i class="fa-solid fa-bars fa-xl"></i>
+        </button>
+      </div>
+    
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden bg-gray-800 text-white">
+        <ul class="flex flex-col space-y-4 py-4 px-6">
+          <li><a href="{% url 'home' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Home</a></li>
+          <li><a href="{% url 'about' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">About</a></li>
+          <li><a href="{% url 'cart_summary' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Cart</a></li>
+    
+          {% if user.is_authenticated %}
+          <li><a href="{% url 'logout' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Logout</a></li>
+          <li><a href="#" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Dashboard</a></li>
+          {% else %}
+          <li><a href="{% url 'login' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Login</a></li>
+          <li><a href="{% url 'register' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Register</a></li>
+          <div class="relative group">
+            <div class="flex items-center text-gray-800 hover:text-blue-600">Categories
+                <svg class="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+            </divclass=>
+            <ul class="absolute hidden group-hover:block bg-white shadow-md mt-2 rounded-md py-2 z-10 w-48">
+                <li><a href="{% url 'home' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">All Products</a></li>
+                <li><hr class="border-gray-200"></li>
+                <li><a href="{% url 'category' 'Monitors' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Monitors</a></li>
+                <li><a href="{% url 'category' 'Keyboards' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Keyboard</a></li>
+                <li><a href="{% url 'category' 'Laptop' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Laptops</a></li>
+                <li><a href="{% url 'category' 'Mouses' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Mouse</a></li>
+                <li><a href="{% url 'category' 'Other' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Other</a></li>
+            </ul>
+        </div>
+
+          {% endif %}
         </ul>
       </div>
     </nav>
+    
 
     <!-- Main Content -->
     {% block content %}
-    <div class="container mx-auto px-4 py-20 flex-grow">
+    <div class="container mx-auto px-4 py-20">
       <h1 class="text-4xl font-bold text-center mb-8">Welcome to SkyMall</h1>
       <p class="text-center text-gray-700">Your one-stop shop for the best deals.</p>
     </div>
     {% endblock %}
 
     <!-- Footer -->
-    <footer class="bg-gray-800  text-white p-4 h-[40px]">
-      <div class="flex justify-center">
-        <p class="mb-1">&copy; 2025 SkyMall -  Shop in Style.</p> 
+    <footer class="bg-gray-800 text-white py-4">
+      <div class="container mx-auto text-center">
+        <p>&copy; 2025 SkyMall - Shop in Style. All Rights Reserved.</p>
       </div>
-      <p class="flex justify-center">All Rights Reserved</p>
-
     </footer>
   </main>
-
-  <script>
-    // JavaScript to handle the hamburger menu toggle
-    const menuToggle = document.getElementById("menu-toggle");
-    const desktopMenu = document.getElementById("menu");
-    const mobileMenu = document.getElementById("mobile-menu");
-
-    menuToggle.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-        desktopMenu.classList.add("hidden");
-    });
-</script>
-</main>
-
 </body>
+
+<script>
+  // JavaScript to handle the hamburger menu toggle
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  menuToggle.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+</script>
 
 </html>
