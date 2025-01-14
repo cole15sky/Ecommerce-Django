@@ -13,6 +13,8 @@
 
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'logout' %}" class="text-gray-800 hover:text-blue-600">Logout</a></li>
+                <li><a href="{% url 'customAdmin','dashboard' %}" class="text-gray-800 hover:text-blue-600">Dashboard</a></li>
+
                 {% else %}
                 <li><a href="{% url 'login' %}" class="text-gray-800 hover:text-blue-600">Login</a></li>
                 <li><a href="{% url 'register' %}" class="text-gray-800 hover:text-blue-600">Register</a></li>
