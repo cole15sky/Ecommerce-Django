@@ -1,15 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="container mx-auto p-6 bg-white shadow rounded-lg mt-6">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Admin Dashboard</h1>
 
-    <h1>
-         This is Dashboard page.
-    </h1>
-    
-</body>
-</html>
+    <!-- Categories Section -->
+    <!-- <div class="bg-gray-100 rounded-lg p-6 shadow mb-8">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Categories</h2>
+        <ul class="divide-y divide-gray-300">
+            {% for category in categories %}
+            <li class="py-2 px-4 hover:bg-gray-200 rounded">{{ category.name }}</li>
+            {% endfor %}
+        </ul>
+    </div> -->
+
+    <!-- Customers Section -->
+    <div class="bg-gray-100 rounded-lg p-6 shadow mb-8">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Customers</h2>
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">#</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">First Name</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Last Name</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Email</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Phone</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for customer in customers %}
+                <tr class="hover:bg-gray-100">
+                    <td class="px-6 py-4">{{ forloop.counter }}</td>
+                    <td class="px-6 py-4">{{ customer.first_name }}</td>
+                    <td class="px-6 py-4">{{ customer.last_name }}</td>
+                    <td class="px-6 py-4">{{ customer.email }}</td>
+                    <td class="px-6 py-4">{{ customer.phone }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Products Section -->
+    <div class="bg-gray-100 rounded-lg p-6 shadow mb-8">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Products</h2>
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">#</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Name</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Price</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Category</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Sale</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Sale Price</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for product in products %}
+                <tr class="hover:bg-gray-100">
+                    <td class="px-6 py-4">{{ forloop.counter }}</td>
+                    <td class="px-6 py-4">{{ product.name }}</td>
+                    <td class="px-6 py-4">${{ product.price }}</td>
+                    <td class="px-6 py-4">{{ product.category.name }}</td>
+                    <td class="px-6 py-4">{{ product.is_sale|yesno:"Yes,No" }}</td>
+                    <td class="px-6 py-4">${{ product.sale_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Orders Section -->
+    <div class="bg-gray-100 rounded-lg p-6 shadow mb-8">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Orders</h2>
+        <table class="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">#</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Product</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Customer</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Quantity</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Address</th>
+                    <th class="px-6 py-3 text-left text-sm font-medium text-gray-600">Status</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                {% for order in orders %}
+                <tr class="hover:bg-gray-100">
+                    <td class="px-6 py-4">{{ forloop.counter }}</td>
+                    <td class="px-6 py-4">{{ order.product.name }}</td>
+                    <td class="px-6 py-4">{{ order.customer.first_name }} {{ order.customer.last_name }}</td>
+                    <td class="px-6 py-4">{{ order.quantity }}</td>
+                    <td class="px-6 py-4">{{ order.address }}</td>
+                    <td class="px-6 py-4">{{ order.status|yesno:"Completed,Pending" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
