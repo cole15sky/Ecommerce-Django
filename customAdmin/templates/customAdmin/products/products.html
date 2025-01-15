@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+
+<table class="mt-5">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Actions</th>
+    </tr>
+    {% for product in objs %}
+    <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.category.name }}</td>
+        <td>
+            <a href="">Edit</a>
+            <a href="" onclick="return confirm('Are you sure?')">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="Add Product</a>
+
+    {% endblock %}
+

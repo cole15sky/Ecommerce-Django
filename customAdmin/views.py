@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from store.models import Category, Customer, Product, Order 
+from store.models import *
 
 def dashboard(request):
     context = {
@@ -11,3 +11,15 @@ def dashboard(request):
         'orders': Order.objects.all(),
     }
     return render(request, 'customAdmin/dashboard.html', context)  
+
+def products(request):
+    objs = Product.objects.all()
+    return render(request, 'customAdmin/products/products.html', {"objs": objs})
+
+def customers(request):
+    objs = Customer.objects.all()
+    return render(request, 'customAdmin/customers/customers.html', {"objs": objs})
+
+
+
+
