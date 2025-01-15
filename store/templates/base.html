@@ -28,7 +28,8 @@
           
           {% if user.is_authenticated %}
           <a href="{% url 'logout' %}" class="text-gray-800 hover:text-blue-600">Logout</a>
-          <a href="#" class="text-gray-800 hover:text-blue-600">Dashboard</a>
+          <a href="{% url 'dashboard' %}" class="text-gray-800 hover:text-blue-600">Dashboard</a>
+
           <div class="relative group">
             <a href="#" class="flex items-center text-gray-800 hover:text-blue-600">Categories
                 <svg class="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -77,7 +78,8 @@
     
           {% if user.is_authenticated %}
           <li><a href="{% url 'logout' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Logout</a></li>
-          <li><a href="#" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Dashboard</a></li>
+          <li><a href="{% url 'dashboard' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Dashboard</a></li>
+
           {% else %}
           <li><a href="{% url 'login' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Login</a></li>
           <li><a href="{% url 'register' %}" class="hover:bg-gray-700 px-4 py-2 rounded-md transition block">Register</a></li>
