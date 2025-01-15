@@ -14,5 +14,12 @@ def dashboard(request):
 
 def products(request):
     objs = Product.objects.all()
-    return render(request, 'customAdmin/products.html', {"objs": objs})
+    return render(request, 'customAdmin/products/products.html', {"objs": objs})
+
+def customers(request):
+    objs = Customer.objects.all()
+    return render(request, 'customAdmin/customers/customers.html', {"objs": objs})
+
+
+
 
