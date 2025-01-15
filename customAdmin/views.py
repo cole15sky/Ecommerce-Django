@@ -13,6 +13,6 @@ def dashboard(request):
     return render(request, 'customAdmin/dashboard.html', context)  
 
 def products(request):
-    objs = products.objects.all()
-    return render(request,'products.html',{"objs":objs})
+    objs = Product.objects.all()
+    return render(request, 'customAdmin/products.html', {"objs": objs})
 
