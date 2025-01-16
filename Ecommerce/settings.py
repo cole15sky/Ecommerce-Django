@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-8n8^o!#l=q2n-t^p^8he&-pggeke&f0dm67jc4ip8w@6!1ld^8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.1.0.0', 'https://skymall-xhuc.onrender.com']
+ALLOWED_HOSTS = ['skymall-xhuc.onrender.com']
+
 
 
 # Application definition
