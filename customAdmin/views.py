@@ -20,6 +20,9 @@ def customers(request):
     objs = Customer.objects.all()
     return render(request, 'customAdmin/customers/customers.html', {"objs": objs})
 
+def orders(request):
+    return (request, 'customAdmin/orders/orders.html', {})
+
 
 
 
