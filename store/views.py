@@ -22,11 +22,10 @@ def product(request,pk):
 
 
 
-
 def login_user(request):
     if request.method == "POST":
         username = request.POST.get('username')
-        password = request.POST.get('password')  
+        password = request.POST.get('password')  # Use .get() here
         
         if username and password:
             user = authenticate(request, username=username, password=password)
@@ -46,29 +45,39 @@ def logout_user(request):
     messages.success(request, "You have been logged out.")
     return redirect('home')
 
-def register_user(request):
-    form = SignUpForm()
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from .forms import SignUpForm
 
-            # Authenticate the user using their credentials
+def register_user(request):
+    form = SignUpForm(request.POST or None)  # Ensure we get POST data or an empty form
+
+    if request.method == 'POST':
+        if form.is_valid():
+            user = form.save()  # Save the new user
+
+            # Authenticate the user
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
 
             if user is not None:
-                login(request, user)
-                messages.success(request, "You have registered successfully. Welcome!")
-                return redirect('home')
+                login(request, user)  
+                messages.success(request, "You have registered successfully.")
+                return redirect('home')  # Redirect after successful registration
             else:
-                messages.error(request, "There was a problem logging you in. Please try again.")
-        else:
-            messages.error(request, "Oops, there was a problem. Try again.")
-            return redirect('register')
-    return render(request, 'register.html', {'form': form})
+                messages.error(request, "Authentication failed. Please try again.")
+                return redirect('register')
 
+        else:
+            # If the form is invalid, print errors for debugging
+            print(form.errors)  # You can remove this in production
+            messages.error(request, "There was an error in your registration. Please try again.")
+            return render(request, 'register.html', {'form': form})
+
+    # GET request will show the empty form
+    return render(request, 'register.html', {'form': form})
 
 
 def category(request, foo):
