@@ -1,24 +1,116 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+
 <body>
-    
-
-
-        <!-- Header-->
-        <header class="bg-gray-900 py-12">
-            <div class="container mx-auto px-4 lg:px-8">
-                <div class="text-center text-white">
-                    <h1 class="text-4xl font-extrabold">About</h1>
-                    <p class="mt-2 text-lg text-gray-400">Welcome to SKYMALL..</p>
-                </div>
-            </div>
-        </header>
-
-        <div class="container">
-            <div class="row">
-
+    <!-- Header -->
+    <header class="bg-gray-900 py-12">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center text-white">
+                <h1 class="text-4xl font-extrabold">About SkyMall</h1>
+                <p class="mt-2 text-lg text-gray-400">
+                    Your ultimate destination for cutting-edge hardware and tech devices.
+                </p>
             </div>
         </div>
-    </body>
+    </header>
 
+    <!-- About Content -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <!-- About Text -->
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-800">Who We Are</h2>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        At SkyMall, we are passionate about delivering premium hardware products that enhance your
+                        digital experience. From high-tech monitors with unparalleled resolution to state-of-the-art
+                        PCs and laptops designed for performance, we’ve got everything you need to stay ahead in the
+                        tech world.
+                    </p>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        We pride ourselves on offering a curated selection of the latest and greatest devices to meet
+                        the needs of gamers, professionals, and tech enthusiasts alike.
+                    </p>
+                </div>
+
+                <!-- About Image -->
+                <div class="rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300">
+                    <img src="{% static 'app/images/about.jpg' %}" alt="SkyMall Hardware" class="w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Products Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-800">What We Offer</h2>
+                <p class="mt-4 text-gray-600">
+                    Explore our extensive range of hardware products, carefully selected to meet your tech needs.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Product Categories -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center hover:bg-gray-200 hover:shadow-2xl transition-all duration-300">
+                    <h3 class="text-xl font-semibold text-gray-800">High-Tech Monitors</h3>
+                    <p class="mt-4 text-gray-600">
+                        Immerse yourself in vivid displays with ultra-high resolution and superior refresh rates.
+                    </p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center hover:bg-gray-200 hover:shadow-2xl transition-all duration-300">
+                    <h3 class="text-xl font-semibold text-gray-800">Performance PCs</h3>
+                    <p class="mt-4 text-gray-600">
+                        Custom-built PCs designed for gamers, creators, and professionals.
+                    </p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center hover:bg-gray-200 hover:shadow-2xl transition-all duration-300">
+                    <h3 class="text-xl font-semibold text-gray-800">Laptops for Every Need</h3>
+                    <p class="mt-4 text-gray-600">
+                        From ultra-portable laptops to high-end machines, we’ve got you covered.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission and Vision -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-800">Our Mission & Vision</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300">
+                    <h3 class="text-xl font-semibold text-gray-800">Our Mission</h3>
+                    <p class="mt-4 text-gray-600">
+                        To provide tech enthusiasts with the latest and greatest hardware, ensuring quality,
+                        performance, and value at every step.
+                    </p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300">
+                    <h3 class="text-xl font-semibold text-gray-800">Our Vision</h3>
+                    <p class="mt-4 text-gray-600">
+                        To be the go-to online destination for hardware devices and technology, enabling our customers
+                        to push the boundaries of innovation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-12 bg-gray-900 text-white">
+        <div class="container mx-auto px-4 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold">Explore the Future with SkyMall</h2>
+            <p class="mt-4 text-gray-400 my-5">
+                Elevate your digital experience with our premium hardware solutions. Start shopping now!
+            </p>
+            <a href="/" class="mt-6 my-3 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105">
+                Browse Our Products
+            </a>
+        </div>
+    </section>
+</body>
 {% endblock %}
